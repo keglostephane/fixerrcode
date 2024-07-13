@@ -20,7 +20,7 @@ const errorCodeSchema = Schema({
     required: true
   },
   reasons: {
-    type: [String],
+    type: [String]
   },
   solutions: {
     type: [Schema.Types.ObjectId],
@@ -29,14 +29,14 @@ const errorCodeSchema = Schema({
   },
   ErrorTag: {
     type: [Schema.Types.ObjectId],
-    ref: 'Tag',
+    ref: 'Tag'
   },
   author: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
   }
-}, 
+},
 { timestamps: true }
 )
 
