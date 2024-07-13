@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "standard",
@@ -14,6 +15,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@adminjs/express": "^6.1.0",
+    "@adminjs/mongoose": "^4.1.0",
+    "adminjs": "^7.8.7",
     "bcrypt": "^5.1.1",
     "express": "^4.19.2",
     "mongoose": "^8.5.0"
