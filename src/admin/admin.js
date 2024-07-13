@@ -1,0 +1,25 @@
+import mongoose from 'mongoose'
+import AdminJS from 'adminjs'
+import AdminJSExpress from '@adminjs/express'
+import { Database, Resource } from '@adminjs/mongoose'
+
+import User from '../api/v1/models/user.js'
+
+AdminJS.registerAdapter({ Database, Resource })
+
+const admin = new AdminJS({
+  databases: [mongoose],
+  rootPath: '/admin',
+  resources: [
+    {
+      resource: User
+    }
+  ],
+  branding: {
+    companyName: 'FixErrCode'
+  }
+})
+
+const adminRouter = AdminJSExpress.buildRouter(admin)
+
+export { admin, adminRouter }
