@@ -7,6 +7,11 @@ const tagSchema = Schema({
     unique: true,
     trim: true,
     lowercase: true
+  },
+  description: {
+    type: String,
+    trim: true,
+    required: true
   }
 })
 

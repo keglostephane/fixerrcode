@@ -7,7 +7,8 @@ const errorCodeSchema = Schema({
   },
   description: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   errorType: {
     type: String,
@@ -20,14 +21,15 @@ const errorCodeSchema = Schema({
     required: true
   },
   reasons: {
-    type: [String]
+    type: [String],
+    trim: true
   },
   solutions: {
     type: [Schema.Types.ObjectId],
     ref: 'Solution',
     required: true
   },
-  ErrorTag: {
+  Tags: {
     type: [Schema.Types.ObjectId],
     ref: 'Tag'
   },

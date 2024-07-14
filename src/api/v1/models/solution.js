@@ -8,6 +8,7 @@ const solutionSchema = Schema({
   },
   title: {
     type: String,
+    trim: true,
     required: true
   },
   author: {
@@ -21,7 +22,9 @@ const solutionSchema = Schema({
     trim: true
   },
   steps: {
-    type: [String]
+    type: [String],
+    trim: true,
+    required: true
   },
   status: {
     type: String,
@@ -32,7 +35,8 @@ const solutionSchema = Schema({
     ref: 'Tag'
   },
   links: {
-    type: [String]
+    type: [String],
+    trim: true
   }
 }, { timestamps: true }
 )
