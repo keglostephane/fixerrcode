@@ -1,4 +1,6 @@
 # Nodejs modules
 node_modules/
 # config files
-*.env
+*.
+# AdminJS
+.adminjs/
