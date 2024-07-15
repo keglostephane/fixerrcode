@@ -20,3 +20,15 @@ export const listErrorCodes = async (req, res) => {
     res.status(500).json({ error: error.message })
   }
 }
+
+export const getErrorDetails = async (req, res) => {
+  try {
+    const error = await errorCode.findOne({ code: req.params.code })
+    if (!error) {
+      return res.status(404).json({ message: 'Error code not found' })
+    }
+    res.json(error)
+  } catch (err) {
+    res.status(500).json({ error: err.message })
+  }
+}
