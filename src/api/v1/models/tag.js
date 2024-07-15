@@ -10,8 +10,7 @@ const tagSchema = Schema({
   },
   description: {
     type: String,
-    trim: true,
-    required: true
+    trim: true
   }
 })
 

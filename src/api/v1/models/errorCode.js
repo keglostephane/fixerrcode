@@ -12,7 +12,7 @@ const errorCodeSchema = Schema({
   },
   errorType: {
     type: String,
-    enum: ['Hardware', 'Software'],
+    enum: ['hardware', 'software'],
     required: true
   },
   errorLevel: {
@@ -26,10 +26,9 @@ const errorCodeSchema = Schema({
   },
   solutions: {
     type: [Schema.Types.ObjectId],
-    ref: 'Solution',
-    required: true
+    ref: 'Solution'
   },
-  Tags: {
+  tags: {
     type: [Schema.Types.ObjectId],
     ref: 'Tag'
   },

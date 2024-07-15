@@ -6,6 +6,9 @@ export const listErrorCodes = async (req, res) => {
     const limit = parseInt(req.query.limit) || 10
     const totalItems = await errorCode.countDocuments()
     const errorCodes = await errorCode.find()
+      .populate('tags', 'name')
+      .populate('solutions', 'orders title description steps links')
+      .populate('author', 'username')
       .skip((page - 1) * limit)
       .limit(limit)
 
@@ -24,6 +27,10 @@ export const listErrorCodes = async (req, res) => {
 export const getErrorDetails = async (req, res) => {
   try {
     const error = await errorCode.findOne({ code: req.params.code })
+      .populate('tags', 'name')
+      .populate('solutions', 'orders title description steps links')
+      .populate('tags', 'name')
+
     if (!error) {
       return res.status(404).json({ message: 'Error code not found' })
     }
@@ -39,7 +46,7 @@ export const getErrorMessage = async (req, res) => {
     if (!error) {
       return res.status(404).json({ message: 'Error code not found' })
     }
-    res.status(200).json(error.description)
+    res.status(200).json({ description: error.description })
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
@@ -47,11 +54,17 @@ export const getErrorMessage = async (req, res) => {
 
 export const getErrorTags = async (req, res) => {
   try {
-    const error = await errorCode.findOne({ code: req.params.code }).populate('tags')
+    const error = await errorCode.findOne({ code: req.params.code })
+      .populate('tags')
+    const totalItems = error.tags.length
+
     if (!error) {
       return res.status(404).json({ message: 'Error code not found' })
     }
-    res.status(200).json(error.tags)
+    res.status(200).json({
+      totalItems,
+      tags: error.tags
+    })
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
@@ -65,7 +78,7 @@ export const getErrorSolutions = async (req, res) => {
     }
     const numErrorSolutions = error.solutions.length
     res.status(200).json({
-      totalSolutions: numErrorSolutions,
+      totalItems: numErrorSolutions,
       solutions: error.solutions
     })
   } catch (err) {
