@@ -6,6 +6,10 @@ const solutionSchema = Schema({
     ref: 'ErrorCode',
     required: true
   },
+  order: {
+    type: Number,
+    required: true
+  },
   title: {
     type: String,
     trim: true,

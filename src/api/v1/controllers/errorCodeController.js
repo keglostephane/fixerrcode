@@ -39,7 +39,35 @@ export const getErrorMessage = async (req, res) => {
     if (!error) {
       return res.status(404).json({ message: 'Error code not found' })
     }
-    res.status(200).json(error)
+    res.status(200).json(error.description)
+  } catch (err) {
+    res.status(500).json({ error: err.message })
+  }
+}
+
+export const getErrorTags = async (req, res) => {
+  try {
+    const error = await errorCode.findOne({ code: req.params.code }).populate('tags')
+    if (!error) {
+      return res.status(404).json({ message: 'Error code not found' })
+    }
+    res.status(200).json(error.tags)
+  } catch (err) {
+    res.status(500).json({ error: err.message })
+  }
+}
+
+export const getErrorSolutions = async (req, res) => {
+  try {
+    const error = await errorCode.findOne({ code: req.params.code }).populate('solutions')
+    if (!error) {
+      return res.status(404).json({ message: 'Error code not found' })
+    }
+    const numErrorSolutions = error.solutions.length
+    res.status(200).json({
+      totalSolutions: numErrorSolutions,
+      solutions: error.solutions
+    })
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
