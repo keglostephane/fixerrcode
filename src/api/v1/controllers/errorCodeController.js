@@ -17,7 +17,7 @@ export const listErrorCodes = async (req, res) => {
       totalPages: Math.ceil(totalItems / limit),
       currentPage: page,
       nextPage: page < Math.ceil(totalItems / limit) ? page + 1 : null,
-      items: errorCodes
+      errors: errorCodes
     })
   } catch (error) {
     res.status(500).json({ error: error.message })
