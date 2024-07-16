@@ -49,9 +49,9 @@ userSchema.methods.comparePassword = async function (password) {
 
 userSchema.statics.findByCredentials = async function (email, password) {
   const user = await this.findOne({ email })
-  if (!user) throw new Error('Invalid login or password')
+  if (!user) return null
   const isMatch = await user.comparePassword(password)
-  if (!isMatch) throw new Error('Invalid login or password')
+  if (!isMatch) return null
   return user
 }
 
