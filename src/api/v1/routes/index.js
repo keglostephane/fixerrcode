@@ -4,7 +4,7 @@ import tagRouter from './tagRoutes.js'
 
 const apiRouter = express.Router()
 
-apiRouter.use('/error', errorCodeRouter)
-apiRouter.use('/tag', tagRouter)
+apiRouter.use('/errors', errorCodeRouter)
+apiRouter.use('/tags', tagRouter)
 
 export default apiRouter
