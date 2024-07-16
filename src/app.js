@@ -8,6 +8,7 @@ const app = express()
 // Connect to database
 dbConnect()
 
+// Middleware
 app.use(express.json())
 
 // API Routes
