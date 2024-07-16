@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import AdminJS from 'adminjs'
 import AdminJSExpress from '@adminjs/express'
 import { Database, Resource } from '@adminjs/mongoose'
+import { authenticate } from '../utils/authenticate.js'
 
 import User from '../api/v1/models/user.js'
 import errorCode from '../api/v1/models/errorCode.js'
@@ -24,6 +25,15 @@ const admin = new AdminJS({
   }
 })
 
-const adminRouter = AdminJSExpress.buildRouter(admin)
+const adminRouter = AdminJSExpress.buildAuthenticatedRouter(admin, {
+  authenticate,
+  cookieName: 'adminjs',
+  cookiePassword: 'secret'
+},
+null,
+{
+  resave: true,
+  saveUninitialized: true
+})
 
 export { admin, adminRouter }
