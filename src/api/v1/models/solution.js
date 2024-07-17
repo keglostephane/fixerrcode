@@ -22,7 +22,6 @@ const solutionSchema = Schema({
   },
   description: {
     type: String,
-    required: true,
     trim: true
   },
   steps: {

@@ -28,7 +28,7 @@ export const getErrorDetails = async (req, res) => {
   try {
     const error = await errorCode.findOne({ code: req.params.code })
       .populate('tags', 'name')
-      .populate('solutions', 'orders title description steps links')
+      .populate('solutions', 'order title description steps links')
       .populate('tags', 'name')
 
     if (!error) {
@@ -72,7 +72,8 @@ export const getErrorTags = async (req, res) => {
 
 export const getErrorSolutions = async (req, res) => {
   try {
-    const error = await errorCode.findOne({ code: req.params.code }).populate('solutions')
+    const error = await errorCode.findOne({ code: req.params.code })
+      .populate('solutions', 'order title description steps links')
     if (!error) {
       return res.status(404).json({ message: 'Error code not found' })
     }
